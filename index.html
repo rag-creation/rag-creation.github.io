@@ -51,9 +51,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline
 /* Top bar */
 .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
 .mark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nmark { width: 46px; height: 46px; display: block; flex: none; }
+.nmark { width: 64px; height: 64px; display: block; flex: none; }
 .flick { width: 34px; height: 34px; display: block; flex: none; color: var(--fg); }
-.mark span { font: 700 22px/1 var(--display); letter-spacing: -.01em; }
+.mark span { font: 700 26px/1 var(--display); letter-spacing: -.01em; }
 .top nav { display: flex; gap: 20px; font-size: 14px; color: var(--muted); }
 .top nav a { text-decoration: none; }
 .top nav a:hover { color: var(--fg); }
@@ -69,7 +69,14 @@ h1 {
   margin: 0; text-align: right;
   font: 700 clamp(64px, 17vw, 168px)/.9 var(--display); letter-spacing: -.02em;
 }
-h1 .stop { color: var(--amber); }
+h1 .hn { height: .7em; width: auto; fill: var(--amber); display: inline-block; vertical-align: baseline; margin-right: .06em; }
+h1 .umio { display: inline-block; white-space: nowrap; vertical-align: baseline; }
+h1 .dot { display: inline-block; width: .1em; height: .1em; border-radius: 50%; background: var(--amber); margin-left: .05em; vertical-align: baseline; }
+#wordmark { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#wordmark .umio { clip-path: inset(0 0 0 0); transition: clip-path .8s cubic-bezier(.75,0,.2,1), opacity .5s ease .25s; }
+#wordmark.logo .umio { clip-path: inset(0 100% 0 0); opacity: 0; transition: clip-path .8s cubic-bezier(.75,0,.2,1), opacity .5s ease .15s; }
+#wordmark .dot { position: relative; transition: transform .8s cubic-bezier(.75,0,.2,1); }
+#wordmark.logo .dot { transform: translateX(calc(-1 * var(--umio-w, 0px))) scale(1.25); }
 .underline {
   height: 3px; margin-top: 18px; background: var(--amber);
   box-shadow: 0 0 18px 2px var(--glow); border-radius: 2px;
@@ -168,7 +175,7 @@ footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
 
   <section class="hero" id="top">
     <div class="readout">apps.filter { <b>noAds</b> &amp;&amp; <b>noTracking</b> } =</div>
-    <h1>Numio<span class="stop">.</span></h1>
+    <h1 id="wordmark" aria-label="Numio" title="Tap to play"><svg class="hn" viewBox="151.7 190 560.4 620" aria-hidden="true"><polygon points="151.7,190 428.4,404.2 300.7,507 300.7,810 151.7,810"/><polygon points="712.1,810 435.4,595.8 563.1,493 563.1,190 712.1,190"/></svg><span class="umio" aria-hidden="true">umio</span><span class="dot" aria-hidden="true"></span></h1>
     <div class="underline" aria-hidden="true"></div>
     <p class="lede">Small, open-source Android apps, made to replace the ones on my own phone.</p>
     <ul class="pledge">
@@ -340,6 +347,26 @@ footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
       } else { fallback(); }
     } catch (e) { fallback(); }
   });
+
+  // Wordmark: "Numio." collapses into the "N." logo, then opens back up.
+  var wm = document.getElementById('wordmark');
+  var umio = wm && wm.querySelector('.umio');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (wm && umio && !reduce) {
+    var measure = function () {
+      wm.style.setProperty('--umio-w', umio.getBoundingClientRect().width + 'px');
+    };
+    var busy = false;
+    var play = function () {
+      if (busy) return; busy = true;
+      wm.classList.add('logo');
+      setTimeout(function () { wm.classList.remove('logo'); setTimeout(function () { busy = false; }, 900); }, 2200);
+    };
+    var start = function () { measure(); setTimeout(play, 1400); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else window.addEventListener('load', start);
+    window.addEventListener('resize', function () { if (!busy) measure(); });
+    wm.addEventListener('click', play);
+  }
 
   // Numio easter egg: tap "Numio" in the footer 7 times.
   var taps = 0, timer, egg = document.getElementById('egg'), running = false;
