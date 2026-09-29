@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/numio-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: one narrow column like a phone display — a calculator-style hero readout, then app "units" stacked, then a quiet footer. Dark-first. */
 :root {
@@ -20,7 +20,7 @@
   --amber: #ffc21a;
   --amber-ink: #1a1400;
   --glow: rgba(255, 194, 26, .35);
-  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --display: "Chakra Petch", "Helvetica Neue", Arial, sans-serif;
   --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --ml: "Manjari", "Noto Sans Malayalam", sans-serif;
@@ -51,9 +51,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline
 /* Top bar */
 .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
 .mark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nmark { width: 36px; height: 36px; display: block; flex: none; }
+.nmark { width: 46px; height: 46px; display: block; flex: none; }
 .flick { width: 34px; height: 34px; display: block; flex: none; color: var(--fg); }
-.mark span { font: 800 18px/1 var(--display); letter-spacing: -.01em; }
+.mark span { font: 700 22px/1 var(--display); letter-spacing: -.01em; }
 .top nav { display: flex; gap: 20px; font-size: 14px; color: var(--muted); }
 .top nav a { text-decoration: none; }
 .top nav a:hover { color: var(--fg); }
@@ -67,14 +67,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline
 .readout b { color: var(--amber); font-weight: 500; }
 h1 {
   margin: 0; text-align: right;
-  font: 800 clamp(64px, 17vw, 168px)/.9 var(--display); letter-spacing: -.045em;
+  font: 700 clamp(64px, 17vw, 168px)/.9 var(--display); letter-spacing: -.02em;
 }
+h1 .stop { color: var(--amber); }
 .underline {
   height: 3px; margin-top: 18px; background: var(--amber);
   box-shadow: 0 0 18px 2px var(--glow); border-radius: 2px;
 }
 .lede {
-  margin: 36px 0 0; max-width: 34ch; font: 500 clamp(20px, 3.4vw, 26px)/1.35 var(--display);
+  margin: 36px 0 0; max-width: 34ch; font: 500 clamp(20px, 3.4vw, 26px)/1.4 var(--body);
   letter-spacing: -.01em; text-wrap: balance;
 }
 .pledge { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding: 0; list-style: none; }
@@ -97,7 +98,7 @@ h1 {
 .app img.icon { width: 76px; height: 76px; border-radius: 20px; display: block; }
 .app > div { min-width: 0; }
 .app-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
-.app h3 { margin: 0; font: 800 26px/1.1 var(--display); letter-spacing: -.02em; }
+.app h3 { margin: 0; font: 700 28px/1.1 var(--display); letter-spacing: -.01em; }
 .status {
   font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em;
   padding: 6px 9px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted);
@@ -122,11 +123,11 @@ h1 {
 
 .soon { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .soon .app { grid-template-columns: 1fr; border-style: dashed; background: transparent; }
-.soon .app h3 { font-size: 20px; }
+.soon .app h3 { font-size: 22px; }
 
 /* Why */
 .why { padding-bottom: 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
-.why h4 { margin: 0 0 6px; font: 800 18px/1.2 var(--display); }
+.why h4 { margin: 0 0 6px; font: 700 20px/1.2 var(--display); }
 .why p { margin: 0; color: var(--muted); font-size: 15px; }
 
 /* Footer */
@@ -140,7 +141,7 @@ footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
 .copy:hover { color: var(--fg); }
 .made { margin-top: 28px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
 #brand { background: none; border: 0; color: inherit; font: inherit; padding: 0; cursor: default; }
-#egg { font: 500 18px/1.4 var(--display); color: var(--amber); min-height: 1.4em; margin-top: 14px; }
+#egg { font: 600 18px/1.4 var(--display); color: var(--amber); min-height: 1.4em; margin-top: 14px; }
 
 @media (max-width: 520px) {
   .top nav { display: none; }
@@ -156,7 +157,7 @@ footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
 <div class="wrap">
   <header class="top">
     <a class="mark" href="#top" aria-label="Numio home">
-      <svg class="nmark" viewBox="0 0 1000 1000" aria-hidden="true"><rect width="1000" height="1000" rx="220" fill="#0f0f0e"/><polygon points="219.1,250.0 442.2,422.8 339.2,505.6 339.2,750.0 219.1,750.0" fill="var(--amber)"/><polygon points="671.1,750.0 447.9,577.2 550.9,494.4 550.9,250.0 671.1,250.0" fill="var(--amber)"/><circle cx="746.6" cy="715.7" r="34.3" fill="var(--amber)"/></svg><span>Numio</span>
+      <svg class="nmark" viewBox="0 0 1000 1000" aria-hidden="true"><polygon points="151.7,190 428.4,404.2 300.7,507 300.7,810 151.7,810" fill="var(--amber)"/><polygon points="712.1,810 435.4,595.8 563.1,493 563.1,190 712.1,190" fill="var(--amber)"/><circle cx="805.7" cy="767.4" r="42.6" fill="var(--amber)"/></svg><span>Numio</span>
     </a>
     <nav aria-label="Sections">
       <a href="#apps">Apps</a>
@@ -167,7 +168,7 @@ footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
 
   <section class="hero" id="top">
     <div class="readout">apps.filter { <b>noAds</b> &amp;&amp; <b>noTracking</b> } =</div>
-    <h1>Numio</h1>
+    <h1>Numio<span class="stop">.</span></h1>
     <div class="underline" aria-hidden="true"></div>
     <p class="lede">Small, open-source Android apps, made to replace the ones on my own phone.</p>
     <ul class="pledge">
